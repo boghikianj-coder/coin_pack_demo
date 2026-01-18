@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$2 Coin Packs — Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">$2</div>
+        <div class="brandText">
+          <div class="brandTitle">Coin Packs</div>
+          <div class="brandSub">Demo (local vault)</div>
+        </div>
+      </div>
+
+      <div class="topActions">
+        <button id="btnNavSeason" class="btn ghost">Season</button>
+        <button id="btnNavVault" class="btn ghost">Vault</button>
+        <button id="btnReset" class="btn danger ghost" title="Clears local demo data">Reset</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- LANDING -->
+      <section id="screenLanding" class="screen">
+        <div class="hero">
+          <h1>Open digital packs.<br/>Backed by real $2 coins.</h1>
+          <p class="muted">
+            This is a demo: deterministic pack outcomes, local-only vault, no payments, no accounts.
+          </p>
+
+          <div class="heroActions">
+            <button id="btnStart" class="btn primary big">Open Pack</button>
+            <button id="btnLearn" class="btn ghost big">How it works</button>
+          </div>
+
+          <div class="statRow">
+            <div class="stat">
+              <div class="statLabel">Packs opened</div>
+              <div id="statPacksOpened" class="statValue">0</div>
+            </div>
+            <div class="stat">
+              <div class="statLabel">Collection</div>
+              <div id="statCollection" class="statValue">0 / 0</div>
+            </div>
+            <div class="stat">
+              <div class="statLabel">Vault value (est.)</div>
+              <div id="statValue" class="statValue">$0.00</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEASON OVERVIEW -->
+      <section id="screenSeason" class="screen hidden">
+        <div class="panel">
+          <h2>Season Overview</h2>
+          <p class="muted">
+            This demo uses a fixed coin pool and a fixed, deterministic pack outcome list for predictable results.
+            Swap in your real season coin list and odds anytime.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <div class="cardTitle">Pack price</div>
+              <div class="cardValue">$12.50</div>
+              <div class="cardHint muted">Demo only — no checkout</div>
+            </div>
+            <div class="card">
+              <div class="cardTitle">Instant liquidity</div>
+              <div class="cardValue">90%</div>
+              <div class="cardHint muted">Shown in vault totals</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>Tier odds (demo disclosure)</h3>
+          <div class="oddsTable" id="oddsTable"></div>
+
+          <div class="divider"></div>
+
+          <h3>Coin Pool (demo)</h3>
+          <div class="coinPool" id="coinPool"></div>
+
+          <div class="actionsRow">
+            <button id="btnSeasonToConfirm" class="btn primary">Continue</button>
+            <button id="btnSeasonBack" class="btn ghost">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PACK CONFIRM -->
+      <section id="screenConfirm" class="screen hidden">
+        <div class="panel">
+          <h2>Confirm Pack</h2>
+          <p class="muted">
+            One coin per pack. Outcome is predetermined in this demo (for consistent testing).
+          </p>
+
+          <div class="confirmBox">
+            <div class="confirmLeft">
+              <div class="confirmTitle">Pack #<span id="confirmPackNumber">1</span></div>
+              <div class="confirmSub muted">Includes: 1 coin • Rarity reveal • Vault add</div>
+            </div>
+            <div class="confirmRight">
+              <div class="priceTag">$12.50</div>
+              <div class="muted small">Demo: $0 charged</div>
+            </div>
+          </div>
+
+          <div class="disclosure">
+            <div class="disclosureTitle">Disclosure</div>
+            <ul>
+              <li>Demo uses deterministic outcomes (hardcoded sequence).</li>
+              <li>Estimated values are placeholders for UI testing.</li>
+              <li>Legendary logic can be time-varying in the real product; demo includes a placeholder Legendary slot.</li>
+            </ul>
+          </div>
+
+          <div class="actionsRow">
+            <button id="btnConfirmOpen" class="btn primary big">Open Pack</button>
+            <button id="btnConfirmBack" class="btn ghost big">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PACK OPENING -->
+      <section id="screenOpening" class="screen hidden">
+        <div class="openingWrap">
+          <div class="openingHeader">
+            <div class="openingTitle">Opening Pack #<span id="openingPackNumber">1</span></div>
+            <div class="openingControls">
+              <button id="btnSound" class="btn ghost small">Sound: Off</button>
+              <button id="btnSkip" class="btn ghost small">Skip</button>
+            </div>
+          </div>
+          
+          <div class="stage">
+                       <!-- Pack -->
+            <div class="pack" id="pack" aria-label="Coin pack">
+              <div class="packRip" aria-hidden="true"></div>
+              <div class="packLabel">COIN PACK</div>
+              <div class="packHint">Tap Open Pack to begin</div>
+            </div>
+
+            <!-- Coin -->
+            <div id="coin" class="coin hidden">
+              <div class="coin3d">
+                <div class="coinFace faceFront">
+                  <img src="coin-heads.png" alt="Coin heads" draggable="false" />
+                </div>
+                <div class="coinFace faceBack">
+                  <img src="coin-tails.png" alt="Coin tails" draggable="false" />
+                </div>
+              </div>
+              <div id="coinRing" class="coinRing"></div>
+            </div>
+
+            <div id="flipHint" class="flipHint hidden">Click coin to flip</div>
+
+
+
+            <!-- Rarity banner -->
+            <div id="rarityBanner" class="rarityBanner hidden">
+              <div class="rarityPill" id="rarityPill">UNCOMMON</div>
+            </div>
+
+            <!-- Metadata -->
+            <div id="meta" class="meta hidden">
+              <div class="metaTitle" id="metaTitle">Coin Name</div>
+              <div class="metaRow">
+                <div class="metaChip" id="metaRarity">Uncommon</div>
+                <div class="metaChip" id="metaTheme">Theme</div>
+                <div class="metaChip" id="metaYear">Year</div>
+              </div>
+              <div class="metaValue muted">Est. value: <span id="metaValue">$0.00</span></div>
+
+              <div class="actionsRow">
+                <button id="btnAddToVault" class="btn primary">Add to Vault</button>
+                <button id="btnViewVaultNow" class="btn ghost">View Vault</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="openingFoot muted small">
+            Animation sequence: Tear → Heads → Rarity → Rotate → Metadata
+          </div>
+        </div>
+      </section>
+
+     <!-- VAULT -->
+<section id="screenVault" class="screen hidden">
+  <!-- Keep header/totals inside the panel (nice readable column) -->
+  <div class="panel">
+    <div class="vaultHeader">
+      <div>
+        <h2>Your Vault</h2>
+
+        <div class="muted small">Your coin discoveries for this season</div>
+
+        <div class="vaultProgress" style="margin-top:10px;">
+          <div class="vaultProgressTop muted small">
+            <span>Collection progress</span>
+            <span id="vaultCompletion">0/0 (0%)</span>
+          </div>
+
+          <div class="progressBar" aria-hidden="true">
+            <div id="vaultProgressFill" class="progressFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vaultTotals">
+        <div class="tot">
+          <div class="totLabel">Total value</div>
+          <div id="vaultTotalValue" class="totValue">$0.00</div>
+          <div class="muted small">Estimated market value</div>
+        </div>
+
+        <div class="tot">
+          <div class="totLabel">Instant liquidity</div>
+          <div id="vaultLiquidity" class="totValue">$0.00</div>
+          <div class="muted small">90% buyback available</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+  </div>
+
+  <!-- Break trays OUT of the panel to go full width -->
+  <div class="vaultFull">
+    <div id="vaultSections" class="vaultSections"></div>
+  </div>
+
+  <!-- Buttons back in the panel -->
+  <div class="panel" style="margin-top:16px;">
+    <div class="actionsRow">
+      <button id="btnVaultOpenNext" class="btn primary">Open Next Pack</button>
+      <button id="btnVaultBack" class="btn ghost">Back</button>
+    </div>
+  </div>
+</section>
+
+      <!-- COIN DETAIL MODAL -->
+      <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modalBackdrop" id="modalBackdrop"></div>
+        <div class="modalCard">
+          <div class="modalHead">
+            <div class="modalTitle" id="modalTitle">Coin</div>
+            <button id="btnModalClose" class="btn ghost small">Close</button>
+          </div>
+          <div class="modalBody">
+            <div class="detailRow">
+              <div class="detailLabel">Year</div>
+              <div class="detailValue" id="modalYear">—</div>
+            </div>
+            <div class="detailRow">
+              <div class="detailLabel">Theme</div>
+              <div class="detailValue" id="modalTheme">—</div>
+            </div>
+            <div class="detailRow">
+              <div class="detailLabel">Rarity</div>
+              <div class="detailValue" id="modalRarity">—</div>
+            </div>
+            <div class="detailRow">
+              <div class="detailLabel">Est. value</div>
+              <div class="detailValue" id="modalValue">—</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="detailRow">
+              <div class="detailLabel">Owned</div>
+              <div class="detailValue" id="modalOwned">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

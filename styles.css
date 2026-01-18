@@ -1,0 +1,943 @@
+:root{
+  --bg:#0b0f14;
+  --panel:#0f1620;
+  --panel2:#111b27;
+  --text:#e9eef5;
+  --muted:#9aa6b2;
+  --line:rgba(255,255,255,0.08);
+
+  --primary:#4aa3ff;
+  --danger:#ff4d4d;
+
+  --common:#9aa6b2;
+  --uncommon:#34d399;
+  --rare:#60a5fa;
+  --ultra:#a78bfa;
+  --legendary:#fbbf24;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  background: radial-gradient(1200px 700px at 20% 0%, rgba(74,163,255,0.15), transparent 50%),
+              radial-gradient(900px 600px at 80% 10%, rgba(167,139,250,0.12), transparent 55%),
+              var(--bg);
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+.hidden{ display:none !important; }
+.small{ font-size:12px; }
+.muted{ color:var(--muted); }
+h1,h2,h3{ margin:0 0 10px; }
+h1{ font-size:42px; line-height:1.05; letter-spacing:-0.02em; }
+h2{ font-size:26px; }
+h3{ font-size:16px; color: var(--text); margin-top: 0; }
+
+#app{ min-height:100%; display:flex; flex-direction:column; }
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px;
+  border-bottom:1px solid var(--line);
+  background: rgba(11,15,20,0.6);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand{ display:flex; align-items:center; gap:10px; }
+.logo{
+  width:40px; height:40px;
+  border-radius:10px;
+  display:grid; place-items:center;
+  font-weight:800;
+  background: linear-gradient(135deg, rgba(74,163,255,0.28), rgba(167,139,250,0.18));
+  border:1px solid var(--line);
+}
+.brandTitle{ font-weight:800; }
+.brandSub{ color:var(--muted); font-size:12px; margin-top:1px; }
+
+.topActions{ display:flex; gap:10px; }
+
+.main{
+  flex:1;
+  padding:18px;
+  display:flex;
+  justify-content:center;
+}
+
+.screen{
+  width: min(980px, 100%);
+}
+
+.hero{
+  padding: 34px 18px;
+  text-align:left;
+}
+.heroActions{
+  display:flex;
+  gap:12px;
+  margin:18px 0 18px;
+  flex-wrap: wrap;
+}
+.statRow{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:12px;
+  margin-top: 18px;
+}
+.stat{
+  background: rgba(15,22,32,0.7);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+.statLabel{ color:var(--muted); font-size:12px; }
+.statValue{ font-size:18px; font-weight:800; margin-top:6px; }
+
+.panel{
+  background: rgba(15,22,32,0.72);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+.card{
+  background: rgba(17,27,39,0.75);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+.cardTitle{ color:var(--muted); font-size:12px; }
+.cardValue{ font-size:20px; font-weight:900; margin-top:6px; }
+.cardHint{ margin-top:4px; font-size:12px; }
+
+.divider{
+  height:1px;
+  background: var(--line);
+  margin: 16px 0;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor:pointer;
+  font-weight:700;
+}
+.btn:hover{ background: rgba(255,255,255,0.09); }
+.btn:active{ transform: translateY(1px); }
+
+.btn.primary{
+  background: rgba(74,163,255,0.22);
+  border-color: rgba(74,163,255,0.35);
+}
+.btn.primary:hover{ background: rgba(74,163,255,0.28); }
+
+.btn.danger{
+  background: rgba(255,77,77,0.14);
+  border-color: rgba(255,77,77,0.28);
+}
+
+.btn.ghost{
+  background: transparent;
+}
+.btn.big{
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+.btn.small{
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.actionsRow{
+  margin-top: 14px;
+  display:flex;
+  gap:12px;
+  flex-wrap: wrap;
+}
+
+.confirmBox{
+  background: rgba(17,27,39,0.75);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.confirmTitle{ font-size:18px; font-weight:900; }
+.confirmSub{ font-size:12px; margin-top:4px; }
+.priceTag{
+  font-weight:900;
+  font-size:18px;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.06);
+  text-align:right;
+}
+.disclosure{
+  margin-top:14px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+  border-radius:14px;
+  padding:14px;
+}
+.disclosureTitle{ font-weight:900; margin-bottom:6px; }
+.disclosure ul{ margin:0; padding-left:18px; color: var(--muted); }
+.disclosure li{ margin:6px 0; }
+
+.oddsTable{
+  display:grid;
+  grid-template-columns: 1fr 120px;
+  gap:8px;
+}
+.oddsRow{
+  display: contents;
+}
+.oddsName{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(17,27,39,0.65);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.badge{
+  font-size:12px;
+  font-weight:900;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.05);
+}
+.oddsVal{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(17,27,39,0.65);
+  text-align:right;
+  font-weight:900;
+}
+
+.coinPool{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:10px;
+}
+.coinPoolItem{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  background: rgba(17,27,39,0.65);
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.coinPoolLeft .name{ font-weight:900; }
+.coinPoolLeft .meta{ font-size:12px; color:var(--muted); margin-top:4px; }
+.coinPoolRight{ text-align:right; }
+.coinPoolRight .value{ font-weight:900; }
+.coinPoolRight .rar{ font-size:12px; margin-top:4px; }
+
+.openingWrap{
+  width: min(820px, 100%);
+  margin: 0 auto;
+}
+.openingHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 10px;
+}
+.openingTitle{ font-weight:900; font-size:16px; }
+.openingControls{ display:flex; gap:10px; flex-wrap:wrap; }
+
+.stage{
+  height: 520px;
+  border:1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(15,22,32,0.72);
+  position: relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* --- PACK ART (CSS-only peel tear) --- */
+.pack{
+  width: 312px;   /* +20% */
+  height: 408px;  /* +20% */
+  position: relative;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  overflow: visible;
+  perspective: 900px;
+  transform-style: preserve-3d;
+  box-shadow: 0 22px 72px rgba(0,0,0,0.55);
+  background: transparent !important;
+}
+
+/* We draw the pack art using pseudo elements so we can “split” it cleanly */
+.pack::before,
+.pack::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: 22px;
+  background-image: url("neutral-pack.png"); /* ✅ FIXED */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform, filter, opacity;
+}
+
+/* TOP half */
+.pack::before{
+  clip-path: inset(0 0 50% 0);
+  transform-origin: 50% 92%;        /* peel from near the seal */
+  z-index: 2;
+}
+
+/* BOTTOM half */
+.pack::after{
+  clip-path: inset(50% 0 0 0);
+  z-index: 1;
+}
+
+/* Subtle inner cavity revealed during tear */
+.pack.tearing::after{
+  filter: brightness(0.92) contrast(1.02);
+}
+
+/* Tear “rip line” */
+.packRip{
+  position:absolute;
+  left: 18px;
+  right: 18px;
+  top: 34px;                        /* seam height — tweak if needed */
+  height: 2px;
+  border-radius: 999px;
+  opacity: 0;
+  z-index: 5;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.0),
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.0)
+  );
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.45),
+    0 1px 0 rgba(255,255,255,0.08) inset;
+}
+
+/* Keep your label/hint above the art */
+.packLabel, .packHint{
+  position:absolute;
+  z-index: 6;
+  left: 18px;
+  color: rgba(233,238,245,0.85);
+}
+.packLabel{
+  top: 18px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+}
+.packHint{
+  bottom: 16px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* --- TEAR ANIMATION --- */
+.pack.tearing .packRip{
+  animation: ripFlash 900ms ease-out forwards;
+}
+
+.pack.tearing::before{
+  animation: peelTop 900ms cubic-bezier(.18,.85,.18,1) forwards;
+}
+
+.pack.tearing::after{
+  animation: settleBottom 900ms cubic-bezier(.18,.85,.18,1) forwards;
+}
+
+@keyframes ripFlash{
+  0%   { opacity: 0; transform: scaleX(0.85); }
+  30%  { opacity: 0.9; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(1.08); }
+}
+
+/* Top peels upward with slight depth */
+@keyframes peelTop{
+  0% {
+    transform: translateY(0) rotateX(0deg) rotateZ(0deg);
+    filter: brightness(1);
+  }
+  40% {
+    transform: translateY(-6px) rotateX(8deg) rotateZ(-0.4deg);
+  }
+  100% {
+    transform: translateY(-34px) rotateX(18deg) rotateZ(-1deg);
+    filter: brightness(0.95);
+  }
+}
+
+/* Bottom barely moves (keeps realism) */
+@keyframes settleBottom{
+  from { transform: translateY(0); }
+  to   { transform: translateY(10px); }
+}
+/* Hold the pack in the "torn open" position so it doesn't snap shut */
+.pack.torn::before{
+  transform: translateY(-34px) rotateX(18deg) rotateZ(-1deg);
+  filter: brightness(0.95);
+}
+
+.pack.torn::after{
+  transform: translateY(10px);
+}
+
+.pack.opened{
+  opacity: 1;
+  transform: none;
+}
+
+/* After the tear, we fade the pack away so it doesn't sit behind the coin */
+.pack.gone{
+  pointer-events: none;
+  animation: packVanish 420ms ease forwards;
+}
+
+/* Ensure the art itself also fades */
+.pack.gone::before,
+.pack.gone::after{
+  animation: packArtVanish 420ms ease forwards;
+}
+
+@keyframes packVanish{
+  to{
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+@keyframes packArtVanish{
+  to{ opacity: 0; }
+}
+
+
+#coin { position: absolute; z-index: 3; }
+#rarityBanner { position: absolute; z-index: 4; }
+#meta { position: absolute; z-index: 5; }
+
+
+
+/* --- COIN 3D SETUP (CORRECT) --- */
+.coin{
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 0;
+
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+
+  transform: translateX(-50%) translateY(260px) scale(0.9);
+  opacity: 0;
+
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+
+.coin .coin3d{
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform-style: preserve-3d; /* REQUIRED */
+}
+
+/* both faces */
+.coin .coinFace{
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), rgba(0,0,0,0.35));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.coin .coinFace img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+  transform: scale(1.02);
+}
+
+.coin .faceFront{
+  transform: translateZ(1px);
+}
+
+.coin .faceBack{
+  transform: rotateY(180deg) translateZ(1px);
+}
+
+
+
+/* --- MOTION: coin rises with bounce + slight rotation --- */
+.coin.showHeads{
+   opacity: 1;
+  transform: translateX(-50%) translateY(160px) scale(1.00);
+   animation: coinRise 960ms cubic-bezier(.15,.85,.15,1) forwards;
+}
+
+@keyframes coinRise{
+  0%   { transform: translateX(-50%) translateY(260px) scale(0.88); opacity:0; }
+  55%  { transform: translateX(-50%) translateY(138px)  scale(1.03); opacity:1; }
+  75%  { transform: translateX(-50%) translateY(166px)  scale(0.99); }
+  100% { transform: translateX(-50%) translateY(160px)  scale(1.00); }
+}
+
+/* --- RARITY pulse feels more alive --- */
+.coin.rarityOn .coinRing{
+  opacity: 1;
+  animation: ringPulse 420ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes ringPulse{
+  0%   { transform: scale(0.92); filter: blur(4px); }
+  60%  { transform: scale(1.05); filter: blur(0px); }
+  100% { transform: scale(1.02); filter: blur(0px); }
+}
+
+.flipHint{
+  position:absolute;
+  top: 360px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--muted);
+  padding: 8px 12px;
+  border-radius: 999px;
+  border:1px solid var(--line);
+  background: rgba(0,0,0,0.25);
+  opacity:0;
+  z-index: 6;
+  pointer-events: none;
+}
+.flipHint.show{
+  animation: hintIn 320ms ease-out forwards;
+}
+@keyframes hintIn{
+  to{ opacity:1; }
+}
+
+
+/* --- REAL FLIP: continuous spin with easing (not a mid-swap) --- */
+.coin.rotate .coin3d{
+  animation: coinFlip 1200ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes coinFlip{
+  from { transform: rotateY(0deg) rotateZ(-6deg); }
+  to   { transform: rotateY(179deg) rotateZ(0deg); }
+}
+
+.coin.rotate{
+  animation: coinWobble 240ms ease-in-out 0ms 5 alternate;
+  transform-origin: 50% 60%;
+}
+
+@keyframes coinWobble{
+  from{ rotate: -0.6deg; }
+  to  { rotate:  0.6deg; }
+}
+
+.rarityBanner{
+  position:absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.rarityPill{
+  font-weight: 1000;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border:1px solid var(--line);
+  background: rgba(0,0,0,0.25);
+}
+
+.meta{
+  position:absolute;
+  bottom: 20px;
+  width: min(680px, calc(100% - 24px));
+  border-radius: 16px;
+  border:1px solid var(--line);
+  background: rgba(17,27,39,0.82);
+  padding: 14px;
+  opacity:0;
+  transform: translateY(14px);
+}
+.meta.show{
+  animation: metaIn 320ms ease-out forwards;
+}
+@keyframes metaIn{
+  from{ opacity:0; transform: translateY(14px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+.metaTitle{
+  font-size:18px;
+  font-weight: 1000;
+}
+.metaRow{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin: 10px 0 10px;
+}
+.metaChip{
+  padding: 8px 10px;
+  border-radius: 999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.05);
+  font-size: 12px;
+  font-weight: 800;
+}
+.metaValue{ font-size: 13px; }
+
+.openingFoot{ margin-top: 10px; }
+
+.vaultHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.vaultProgress{
+  margin-top: 10px;
+  max-width: 520px;
+}
+.vaultProgressTop{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 8px;
+}
+.progressBar{
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.progressFill{
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(233,238,245,0.55); /* neutral, not “reward-y” */
+}
+.vaultTotals{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.tot{
+  border:1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+  border-radius:14px;
+  padding:12px;
+  min-width: 210px;
+}
+.totLabel{ color:var(--muted); font-size:12px; }
+.totValue{ font-size:18px; font-weight:1000; margin-top:6px; }
+
+.vaultSections{
+  display:flex;
+  flex-direction:column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* --- TRAY (velvet, closer to reference) --- */
+.section{
+  position: relative;
+  border-radius: 22px;
+  padding: 22px;
+  overflow: hidden;
+  isolation: isolate;
+  width: 100%;
+
+  background:
+    /* crushed velvet nap streaks */
+    repeating-linear-gradient(160deg,
+      rgba(255,255,255,0.01) 0px,
+      rgba(255,255,255,0.01) 3px,
+      rgba(0,0,0,0.00) 12px,
+      rgba(0,0,0,0.00) 28px
+    ),
+
+    /* nap direction shading */
+    linear-gradient(180deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.03) 35%,
+      rgba(0,0,0,0.22) 70%,
+      rgba(0,0,0,0.40)
+    ),
+
+    /* vignette / tray cavity */
+    radial-gradient(120% 140% at 50% 15%,
+      rgba(255,255,255,0.10),
+      rgba(0,0,0,0.45) 75%
+    ),
+
+    rgba(0,0,0,0.28);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    inset 0 -18px 26px rgba(0,0,0,0.48),
+    0 12px 34px rgba(0,0,0,0.38);
+}
+
+
+/* Content above overlays */
+.section > *{
+  position: relative;
+  z-index: 2;
+}
+
+/* Velvet dye (rarity tint) — sits under the grain */
+.section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index: 0;
+
+  background: var(--tray-dye, rgba(255,255,255,0));
+  mix-blend-mode: multiply;
+  opacity: 1;
+}
+
+/* Velvet grain (random noise via inline SVG) */
+.section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index: 1;
+
+  background-image:
+  url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='220'%20height='220'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.9'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='220'%20height='220'%20filter='url(%23n)'%20opacity='.55'/%3E%3C/svg%3E"),
+  radial-gradient(circle at 20% 30%, rgba(0,0,0,0.25), transparent 60%),
+  radial-gradient(circle at 70% 60%, rgba(0,0,0,0.18), transparent 55%);
+  
+  background-size:
+  260px 260px,
+  420px 420px,
+  520px 520px;
+
+  background-repeat: repeat;
+
+  opacity: 0.32;
+  mix-blend-mode: overlay;
+  filter: contrast(140%) brightness(90%);
+}
+
+
+/* --- HEADER --- */
+.sectionHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 12px;
+}
+.sectionTitle{
+  font-weight: 1000;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sectionCount{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* --- CAPSULE CUTOUT GRID --- */
+.slotGrid{
+  display:flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Capsule cutout */
+.slot{
+  flex: 0 0 98px;       /* keeps consistent hole size */
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  /* velvet rim + cavity */
+  background:
+    radial-gradient(circle at 35% 35%,
+      rgba(255,255,255,0.10),
+      rgba(0,0,0,0.78) 60%,
+      rgba(0,0,0,0.92)
+    );
+
+  box-shadow:
+    /* soft rim highlight */
+    inset 0 2px 3px rgba(255,255,255,0.06),
+    /* deep cavity */
+    inset 0 16px 22px rgba(0,0,0,0.60),
+    /* slight lip shadow on tray */
+    0 3px 8px rgba(0,0,0,0.25);
+
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+/* Coin image inside capsule hole */
+.slot .coinImg{
+  width: 86%;
+  height: 86%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+
+  /* Make it read like a coin under a capsule */
+  box-shadow:
+    inset 0 1px 3px rgba(255,255,255,0.10),
+    inset 0 -10px 16px rgba(0,0,0,0.55),
+    0 8px 18px rgba(0,0,0,0.40);
+}
+
+
+.slot:not(.empty){
+  cursor:pointer;
+}
+.slot:not(.empty):hover{
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,0.06),
+    inset 0 16px 22px rgba(0,0,0,0.60),
+    0 6px 14px rgba(0,0,0,0.28);
+}
+
+.slot.empty{
+  opacity: 0.38;
+}
+
+/* Hide text UI inside capsule holes (we’ll add coin images later) */
+.slotTop,
+.slotMeta,
+.slotQty{
+  display:none !important;
+}
+.vaultFull{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 0 24px;
+}
+
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display:grid;
+  place-items:center;
+}
+.modalBackdrop{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+}
+.modalCard{
+  position: relative;
+  width: min(520px, calc(100% - 24px));
+  border-radius: 16px;
+  border:1px solid var(--line);
+  background: rgba(15,22,32,0.95);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+  overflow:hidden;
+}
+.modalHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.modalTitle{ font-weight:1000; }
+.modalBody{ padding: 14px; }
+.detailRow{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding: 10px 0;
+}
+.detailLabel{ color: var(--muted); }
+.detailValue{ font-weight: 900; }
+
+.pack.shake{
+  animation: packShake 180ms ease-in-out 2;
+}
+@keyframes packShake{
+  0%{ transform: rotate(0deg) translateX(0); }
+  25%{ transform: rotate(-1deg) translateX(-2px); }
+  50%{ transform: rotate(1deg) translateX(2px); }
+  75%{ transform: rotate(-1deg) translateX(-1px); }
+  100%{ transform: rotate(0deg) translateX(0); }
+}
+
+.pack.release{
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3) inset;
+}
+/* Velvet tint per rarity */
+/* Set the dye colour (keep your hues, lower the opacity) */
+.tray-legendary{ --tray-dye: rgba(251, 190, 36, 0.22); }
+.tray-ultra-rare{ --tray-dye: rgba(112, 0, 146, 0.22); }
+.tray-rare{ --tray-dye: rgba(36, 10, 187, 0.20); }
+.tray-uncommon{ --tray-dye: rgba(10, 207, 20, 0.14); }
+.tray-common{ --tray-dye: rgba(78, 104, 129, 0.12); }
+
+
+
